@@ -1,0 +1,17 @@
+---
+
+ - hosts: smtpout
+   become: yes
+   tasks:
+    - name: create directory
+      file:
+       path: /opt/gwava/certs/
+       state: directory
+       group: gwava
+       owner: gwava
+       mode: '0755'
+
+    - name: Transfer file from master to client
+      synchronize:
+        src: /opt/smtpout/certs/
+        dest: /opt/gwava/certs/

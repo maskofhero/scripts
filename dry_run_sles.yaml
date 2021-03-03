@@ -1,0 +1,40 @@
+---
+
+ - hosts: all 
+   become: yes
+   tasks:
+
+#      - name: create directory
+#        file:
+#         path: /vastorage/scripts/
+#         state: directory
+#         group: users 
+#         owner: vaadmin
+#         mode: '0755'
+
+#      - name: Recursively remove directory
+#        file:
+#         path: /vastorage/smg/
+#         state: absent
+
+      - name: first run 
+        shell: "/opt/novell/va_install/va_firstboot_smg-appliance"
+#         register: result
+#         ignore_errors: yes 
+#      - name: Transfer file from master to client
+#        synchronize:
+#         src: /vastorage/smg/
+#         dest: /vastorage/smg/
+#         notify: apache2 restart
+
+#   handlers:
+#      - name: apache2 restart
+#        service: name=apache2 state=restarted
+
+#      - name: copy files ssl file
+#        copy: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} group={{ item.group }} mode={{ item.mode }}
+#        with_items:
+#        #- {src: '/opt/smtpout/ssl/ssl.conf', dest: '/etc/apache2/sites-available/ssl.conf', mode: 755, owner: 'root', group: 'root'}
+#        - {src: '/home/mukhlis/provisioneduservalidation.php', dest: '/opt/gwava/gwavaman/http_cgi/security/provisioneduservalidation.php', mode: 755, owner: 'root', group: 'root'}
+#        - {src: '/home/mukhlis/remote_auth.php', dest: '/opt/gwava/gwavaman/http_cgi/security/remote_auth.php', mode: 755, owner: 'root', group: 'root'}
+

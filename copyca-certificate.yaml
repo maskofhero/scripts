@@ -1,0 +1,11 @@
+---
+
+ - hosts: smtpout
+   become: yes
+   tasks:
+      - name: copy files ssl file
+        copy: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} group={{ item.group }} mode={{ item.mode }} backup={{ item.backup }}
+        with_items:
+        - {src: '/opt/smtpout/ca-certificate/ca-certificates.crt', dest: '/etc/ssl/certs/ca-certificates.crt', mode: 644, owner: 'root', group: 'root', backup: 'yes'}
+        - {src: '/opt/smtpout/ldap/ldap.conf', dest: '/etc/ldap/ldap.conf', mode: 644, owner: 'root', group: 'root', backup: 'yes'}
+

@@ -1,0 +1,30 @@
+- hosts: local
+  connection: local
+  become: yes
+  become_user: root
+  tasks:
+   - name: Install Apache2
+     apt:
+       name: apache2
+       state: present
+       update_cache: true
+       notify:
+       - Start Apache2
+
+- hosts: remote
+  become: yes
+  become_user: root
+  tasks:
+   - name: Install Apache2
+     apt:
+       name: apache2
+       state: present
+       update_cache: true
+       notify:
+       - Start Apache2
+
+  handlers:
+   - name: Start Apache2
+     service:
+       name: Apache2
+       state: started

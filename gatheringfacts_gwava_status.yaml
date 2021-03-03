@@ -1,0 +1,24 @@
+---
+
+- hosts: smtpout
+  become: yes
+  gather_facts: True
+  tasks:
+#  - name: checking service status
+#    command: systemctl status "{{ item }}"
+#    with_items:
+    #- firewalld
+#    - httpd
+#    - vsftpd
+#    - sshd
+    #- postfix
+#    register: result
+#    ignore_errors: yes
+  - name: checking SMG status
+    command: "/etc/init.d/gwava7 status"
+    register: result
+    ignore_errors: yes
+
+  - name: showing report
+    debug:
+     var: result

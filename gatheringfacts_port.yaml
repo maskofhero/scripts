@@ -1,0 +1,33 @@
+---
+
+- hosts: testin
+  become: yes
+  gather_facts: True
+  tasks:
+
+  - name: 
+    command: "nmap -p 25 m4w0335.houston.softwaregrp.net"
+    register: result
+    ignore_errors: yes
+
+  - name: 
+    command: "nmap -p 25 m4w0334.houston.softwaregrp.net"
+    register: result
+    ignore_errors: yes
+
+  - name: showing report
+    debug:
+     var: result
+
+#  - name:
+#    cli_command:
+#      command: "{{ item }}"
+#      register: result
+#      ignore_errors: yes
+#    loop:
+#      - nmap -p 25 m4w0335.houston.softwaregrp.net
+#      - nmap -p 25 m4w0334.houston.softwaregrp.net
+
+#  - name: showing report
+#    debug:
+#      var: result

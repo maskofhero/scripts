@@ -1,0 +1,20 @@
+---
+
+- hosts: testin
+  become: yes
+  gather_facts: True
+  tasks:
+  - name: checking service status
+    command: systemctl status "{{ item }}"
+    with_items:
+    - firewalld
+    - httpd
+    - smg
+#    - sshd
+#    - postfix
+    register: result
+    ignore_errors: yes
+
+  - name: showing report
+    debug:
+     var: result

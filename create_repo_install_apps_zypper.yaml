@@ -1,0 +1,33 @@
+---
+
+ - hosts: all 
+   become: yes
+   tasks:
+
+
+      - zypper_repository:
+          name: oss
+          repo: 'http://download.opensuse.org/update/leap/15.1/oss/'
+          state: present
+          auto_import_keys: yes
+
+      - zypper:
+          name: rsync
+          state: present
+          update_cache: yes
+
+      - zypper:
+          name: nmap
+          state: present
+          update_cache: yes
+
+      - zypper:
+          name: telnet
+          state: present
+          update_cache: yes
+
+      - zypper:
+          name: dmidecode
+          state: present
+          update_cache: yes
+

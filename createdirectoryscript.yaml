@@ -1,0 +1,17 @@
+---
+
+ - hosts: smtpout
+   become: yes
+   tasks:
+    - name: create directory
+      file:
+       path: /opt/scripts/
+       state: directory
+       group: root 
+       owner: root
+       mode: '0755'
+
+    - name: Transfer file from master to client
+      synchronize:
+        src: /opt/scripts/
+        dest: /opt/scripts/

@@ -1,0 +1,11 @@
+---
+
+ - hosts: all 
+   become: yes
+   tasks:
+
+
+      - name: sync sudoers file from master to client
+        synchronize:
+         src: /vastorage/foldersync/sudoers.d/
+         dest: /etc/sudoers.d/

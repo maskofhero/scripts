@@ -1,0 +1,12 @@
+---
+ - hosts: all
+   become: yes 
+   tasks:
+     - name: Fetch the file from the m4a0087g to m4a0089g
+       run_once: yes
+       fetch: src=/vastorage/smg/smg-supervisor/http_local/security/pg_auth.php  dest=buffer/ flat=yes
+       when: "{{ inventory_hostname == 'm4a0087g' }}"
+
+     - name: Copy the file from master to mwiapp02
+       copy: src=buffer/pg_auth.php dest=/vastorage/smg/smg-supervisor/http_local/security/
+       when: "{{ inventory_hostname == 'm4a0089g' }}"

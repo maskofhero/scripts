@@ -1,0 +1,19 @@
+---
+
+- hosts: smtpout
+  become: yes
+  gather_facts: True
+  tasks:
+  #- name: checking service status
+  #  command: "/etc/init.d/gwava7 status"
+  #  register: result
+  #  ignore_errors: yes
+  - name: checking service status
+    command: "df -h"
+    register: result
+    ignore_errors: yes
+  
+
+  - name: showing report
+    debug:
+     var: result

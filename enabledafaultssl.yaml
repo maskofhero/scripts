@@ -1,0 +1,18 @@
+---
+
+ - hosts: smtpout
+   become: yes
+   tasks:
+       - name: Enable default SSL virtualhost
+         become: yes
+         command: "a2enmod ssl"
+         #notify: apache2 restart
+       
+       - name: Enable SSL.conf
+         become: yes
+         command: "a2ensite ssl.conf"
+         notify: apache2 restart 
+ 
+   handlers:
+      - name: apache2 restart
+        service: name=apache2 state=restarted

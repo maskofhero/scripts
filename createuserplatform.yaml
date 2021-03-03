@@ -1,0 +1,17 @@
+---
+ - hosts: all
+   become: yes
+
+   tasks:
+
+    - name: Create a login user
+      user:
+        name={{ item }}
+        state=present
+        groups=sudo
+        password=''
+        shell=/bin/bash
+        home=/home/{{ item }}
+      with_items:
+        - platform 
+

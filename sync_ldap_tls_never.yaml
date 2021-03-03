@@ -1,0 +1,53 @@
+---
+
+ - hosts: all 
+   become: yes
+   tasks:
+
+#      - name: create directory
+#        file:
+#         path: /vastorage/scripts/
+#         state: directory
+#         group: users 
+#         owner: vaadmin
+#         mode: '0755'
+
+#      - name: Recursively remove directory
+#        file:
+#         path: /vastorage/script/
+#         state: absent
+#      - name: create directory
+#        file:
+#         path: /vastorage/certs/
+#         state: directory
+#         group: root
+#         owner: root
+#         mode: '0644'
+
+      - name: sync ldap file from master to client
+        synchronize:
+         src: /etc/openldap/ldap.conf
+         dest: /etc/openldap/ldap.conf
+
+#      - name: sync security from master to client
+#        synchronize:
+#         src: /vastorage/foldersync/security/
+#         dest: /vastorage/smg/smg-supervisor/http_local/security/
+
+#      - name: sync certs from master to client
+#        synchronize:
+#         src: /vastorage/foldersync/certs/
+#         dest: /vastorage/certs/
+
+
+#   handlers:
+#      - name: apache2 restart
+#        service: name=apache2 state=restarted
+
+#      - name: copy files ssl file
+#        copy: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} group={{ item.group }} mode={{ item.mode }}
+#        with_items:
+#        #- {src: '/opt/smtpout/ssl/ssl.conf', dest: '/etc/apache2/sites-available/ssl.conf', mode: 755, owner: 'root', group: 'root'}
+#        - {src: '/home/mukhlis/provisioneduservalidation.php', dest: '/opt/gwava/gwavaman/http_cgi/security/provisioneduservalidation.php', mode: 755, owner: 'root', group: 'root'}
+#        - {src: '/home/mukhlis/remote_auth.php', dest: '/opt/gwava/gwavaman/http_cgi/security/remote_auth.php', mode: 755, owner: 'root', group: 'root'}
+

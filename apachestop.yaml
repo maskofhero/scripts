@@ -1,0 +1,38 @@
+---
+
+ - hosts: smtpout
+   become: yes
+   tasks:
+
+#      - name: create directory
+#        file:
+#         path: /opt/gwava/certs/
+#         state: directory
+#         group: gwava
+#         owner: gwava
+#         mode: '0755'
+
+#      - name: Transfer file from master to client
+#        synchronize:
+#         src: /opt/smtpout/certs/
+#         dest: /opt/gwava/certs/
+
+      - name: copy files ssl file
+        copy: src={{ item.src }} dest={{ item.dest }} owner={{ item.owner }} group={{ item.group }} mode={{ item.mode }}
+        with_items:
+        #- {src: '/opt/smtpout/ssl/ssl.conf', dest: '/etc/apache2/sites-available/ssl.conf', mode: 755, owner: 'root', group: 'root'}
+        - {src: '/home/mukhlis/provisioneduservalidation.php', dest: '/opt/gwava/gwavaman/http_cgi/security/provisioneduservalidation.php', mode: 755, owner: 'root', group: 'root'}
+        - {src: '/home/mukhlis/remote_auth.php', dest: '/opt/gwava/gwavaman/http_cgi/security/remote_auth.php', mode: 755, owner: 'root', group: 'root'}
+        notify: apache2 restart    
+
+#      - name: Enable default SSL virtualhost
+#        command: "a2enmod ssl"
+
+#      - name: Enable SSL.conf
+#        become: yes
+#        command: "a2ensite ssl.conf"
+#        notify: apache2 restart
+
+   handlers:
+      - name: apache2 restart
+        service: name=apache2 state=restarted

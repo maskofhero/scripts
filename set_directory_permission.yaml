@@ -1,0 +1,84 @@
+---
+
+ - hosts: smg 
+   become: yes
+   ignore_errors: yes   
+   tasks:
+#      - name: set permission
+#        file: path={{ item.path }} owner={{ item.owner }} group={{ item.group }} mode={{ item.mode }} mode={{ item.state }}
+#        with_items:
+#        - {path: '/opt/gwava/gwava/private/./mimework/', owner: 'root', group: 'gwava', mode: '0730', state: 'directory'}
+#        - {src: '/home/mukhlis/remote_auth.php', dest: '/opt/gwava/gwavaman/http_cgi/security/remote_auth.php', mode: 755, owner: 'root', group: 'root'}
+
+       - name: tweak permissions
+         file:
+            path: "{{ item }}"
+            mode: "0740"
+            owner: root
+            group: gwava
+#            state: directory
+         with_items:
+            - /opt/gwava/config/system.xml
+#            - "/opt/gwava/services/logs/gwava-*/"
+
+       - name: change permission using shell
+         shell: 'chown root:gwava /opt/gwava/gwava/private/*/mimework/; chmod 0750 /opt/gwava/gwava/private/*/mimework/'
+         args:
+          warn: False
+
+       - name: change permission using shell
+         shell: 'chown root:gwava /opt/gwava/gwava/private/*/temp/; chmod 0750 /opt/gwava/gwava/private/*/temp/'
+         args:
+          warn: False
+
+       - name: change permission using shell
+         shell: 'chown root:gwava /opt/gwava/gwava/private/*/problem/; chmod 0750 /opt/gwava/gwava/private/*/problem/'
+         args:
+          warn: False
+
+       - name: change permission using shell
+         shell: 'chown root:gwava /opt/gwava/gwava/private/*/extract/; chmod 0750 /opt/gwava/gwava/private/*/extract/'
+         args:
+          warn: False
+#          failed_when: false
+#          changed_when: false
+
+       - name: change permission using shell
+         shell: 'chown root:gwava /opt/gwava/gwava/private/*/qms_upload/; chmod 0750 /opt/gwava/gwava/private/*/qms_upload/'
+         args:
+          warn: False
+#          failed_when: false
+#          changed_when: false
+
+       - name: change permission using shell
+         shell: 'chown root:gwava /opt/gwava/gwava/private/*/services/; chmod 0750 /opt/gwava/gwava/private/*/services/'
+         args:
+          warn: False
+#          failed_when: false
+#          changed_when: false
+
+       - name: change permission using shell
+         shell: 'chown root:gwava /opt/gwava/gwava/private/*/spamreport/; chmod 0750 /opt/gwava/gwava/private/*/spamreport/'
+         args:
+          warn: False
+#          failed_when: false
+#          changed_when: false
+
+       - name: change permission using shell
+         shell: 'chown root:gwava /opt/gwava/services/logs/*; chmod 02750 /opt/gwava/services/logs/*'
+         args:
+          warn: False
+#          failed_when: false
+#          changed_when: false
+
+       - name: change permission using shell
+
+         shell: 'chown root:gwava /opt/gwava/gwava/private/*/avclean.tst*; chmod 0654 /opt/gwava/gwava/private/*/avclean.tst*'
+         args:
+          warn: False
+
+       - name: change permission using shell
+         shell: 'chown root:gwava /opt/gwava/gwava/private/*/aveicar.tst*; chmod 0654 /opt/gwava/gwava/private/*/aveicar.tst*'
+         args:
+          warn: False
+

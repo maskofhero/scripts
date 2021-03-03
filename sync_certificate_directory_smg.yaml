@@ -1,0 +1,11 @@
+---
+
+ - hosts: all 
+   become: yes
+   tasks:
+
+      - name: sync config file from master to client
+        synchronize:
+         src: /vastorage/foldersync/certs/
+         dest: /vastorage/certs/
+

@@ -1,0 +1,32 @@
+---
+- name: Sync Pull task - Executed on  the Destination host "m4a0089"
+  hosts: m4a0087g
+  become: yes
+  tasks:   
+    - name: Copy the file from m4a0087 to m4a0089 using Method Pull
+      tags: sync-pull
+      synchronize:
+        src: "{{ item }}"
+        dest: "{{ item }}"
+        mode: pull
+      delegate_to: m4a0089g
+      register: syncfile
+#      run_once: true
+      with_items:
+       - "/vastorage/smg/smg-supervisor/http_local/security/"
+       - "/vastorage/smg/config/system.xml"
+
+#- name: Sync Push task - Executed on source host "{{groups['app'][0]}}"
+#  hosts: "{{groups['app'][1]}}" 
+#  user: wlsusr
+#  tasks:
+#    - name: Copy the file from mwiapp01 to mwiapp02 using Method Push
+#      tags: sync-push
+#      synchronize:
+#        src: "{{ item }}"
+#        dest: "{{ item }}"
+#        mode: push
+#      delegate_to: "{{groups['app'][0]}}"
+#      register: syncfile
+#      with_items:
+#       - "/tmp/app01-to-app02.jar"
